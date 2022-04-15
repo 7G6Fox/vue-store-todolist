@@ -1,0 +1,87 @@
+@import './css/color.scss';
+html {
+    font-size: 12px;
+    font-size: 62.5%;
+    /* 10÷16=62.5% */
+}
+
+body {
+    font: 1.2rem "宋体", "Arial Narrow", HELVETICA;
+    background: $white;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    color: $black;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+em {
+    font-style: normal;
+}
+
+
+/*去除input标签点击之后的出现的轮廓线*/
+
+input {
+    outline-style: none;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    border: 0;
+    vertical-align: middle;
+}
+
+table {
+    //两个边框重合时去重
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+p {
+    //文字若不能完整呈现在盒子里，则换行
+    overflow-wrap: break-word;
+}
+
+button {
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+img {
+    max-width: 100%;
+}
+
+.back_img {
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.margin {
+    margin: 0 auto;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

@@ -1,0 +1,16 @@
+// mixin
+//封装flex布局
+@mixin flex($direct) {
+    display: flex;
+    flex-direction: $direct;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+.row_flex {
+    @include flex(row);
+}
+
+.col_flex {
+    @include flex(column);
+}
