@@ -27,14 +27,12 @@
 </template>
 
 <script>
-
 export default {
   name: "MyFooter",
   props: ["todos", "checkAllTodo", "clearAllTodo", "isShow"],
   data() {
     return {
       index: 0,
-  
     };
   },
   computed: {
@@ -61,9 +59,9 @@ export default {
     index(value) {
       //console.log("index被改变了", value);
       this.isShow(value);
-    }},
-    methods: {
-    
+    },
+  },
+  methods: {
     clearAll() {
       this.clearAllTodo();
     },
@@ -79,41 +77,59 @@ export default {
 
 <style lang='scss' scoped>
 /*footer*/
-@import '@/assets/css/listcomm.scss';
+@import "assets/css/color.scss";
 .todo-footer {
-    height: 40px;
-    line-height: 40px;
-    padding-left: 6px;
-    margin-top: 5px;
-    label input {
-        position: relative;
-        top: -1px;
-        vertical-align: middle;
-        margin-right: 5px;
-    }
-    button {
-        float: right;
-        margin: 10px;
-    }
-    
-    //点击全部、剩余的样式
-input.btn-none {
+  height: 40px;
+  line-height: 40px;
+  padding-left: 6px;
+  margin-top: 5px;
+  label input {
+    position: relative;
+    top: -1px;
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+  button {
+    float: right;
+    margin: 10px;
+  }
+
+  //点击全部、剩余的样式
+  input[type="checkbox"] {
+    transform: scale(1.5);
+    cursor: pointer;
+  }
+  .btn-none {
     color: $blue;
     border: 1px solid $boder-b;
     background-color: $white;
     margin-left: 5px;
-}
+  }
 
-
-
-.isActive {
+  .isActive {
     color: $white !important;
     background-color: $blue !important;
     border: 1px solid $boder-b !important;
+  }
+}
+.btn {
+  padding: 4px 12px;
+  font-size: 16px;
+  line-height: 20px;
+  box-shadow: inset 0 1px 3px 1px $shadow-g;
+  cursor: pointer;
 }
 
+.btn-danger {
+  color: $white;
+  background-color: $blue;
+  border: 1px solid $boder-b;
+  &:hover {
+    color: $white;
+    background-color: $light-blue;
+  }
+  &:focus {
+    outline: none;
+  }
 }
-
-
-
 </style>

@@ -1,7 +1,5 @@
 <template>
   <div id="shopMall">
-    <h1>跳蚤市场</h1>
- 
       <router-view></router-view>
       <navbar></navbar>
   </div>
@@ -9,19 +7,19 @@
 
 <script>
  import navbar from './mall/navBar.vue'
+
+
 export default {
   name: "shopMall",
   components:{navbar},
-  data() {
-    return {
-      
-    }
+  created(){
+       
   }
  
 };
 </script>
 
-<style lang="scss" scoped>
-@import "@/assets/css/mall/mall.scss";
-
+<style lang="scss">
+@import "assets/css/mall/mall.scss";
+@import "assets/iconfont/iconfont.css";
 </style>

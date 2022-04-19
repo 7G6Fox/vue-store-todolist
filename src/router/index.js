@@ -1,16 +1,16 @@
 import VueRouter from "vue-router"
 import App from '../App'
-import home from '../view/my-index'
-import login from '../components/user-login'
-import write from '../view/home/h-write'
+import home from 'view/my-index'
+import login from 'components/user-login'
+import write from 'view/home/h-write'
 import blog from './blog'
 import shop from './shop'
 const shopMall = () =>
-    import ('../view/demo//shopMall.vue'); //懒加载页面
+    import ('view/demo/shopMall.vue'); //懒加载页面
 const musicPlay = () =>
-    import ('../view/demo/musicPlay');
+    import ('view/demo/musicPlay');
 const todoList = () =>
-    import ('../view/demo/todoList');
+    import ('view/demo/todoList');
 export default new VueRouter({
     routes: [{ //配置顶级路由，对应index.html
         path: '/',

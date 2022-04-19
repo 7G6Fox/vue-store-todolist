@@ -1,19 +1,19 @@
 <template>
   <bar> 
-      <item path='shopHome' >
+      <item path='shopHome' itemColor='#ff9234'>
         <i slot='icon' class="iconfont icon-mall"/>
         <p slot='text'>首页</p>
       </item>
-      <item path='category'>
+      <item path='category' itemColor='#ff9234'>
         <i slot='icon' class="iconfont icon-tag2"/>
         <p slot='text' class="item-text">分类</p>
       </item>
-      <item path='car'>
+      <item path='car' itemColor='#ff9234'>
         <i slot='icon'  class="iconfont icon-shop2"/>
         <p slot='text' class="item-text">购物车</p>
       </item>
 
-      <item path='shopCentre'>
+      <item path='shopCentre' itemColor='#ff9234'>
           <i slot='icon'  class="iconfont icon-person"/>
           <p slot='text' class="item-text">我的</p>
       </item>
@@ -21,13 +21,13 @@
 </template>
 
 <script>
-import bar from "./tabBar";
-import item from "./tabItem";
+import bar from "components/common/tabBar";
+import item from "components/common/tabItem";
 export default {
 components: {bar,item},
 }
 </script>
 
-<style>
+<style scope>
 
 </style>

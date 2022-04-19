@@ -17,7 +17,7 @@ export default {
     path: { type: String },
     itemColor: {
       type: String,
-      default: "#ff9234",
+      default: "black",
     },
   },
   computed: {

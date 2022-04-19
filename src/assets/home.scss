@@ -1,19 +1,13 @@
-@import './css/color.scss';
-html {
-    font-size: 12px;
-    font-size: 62.5%;
-    /* 10÷16=62.5% */
-}
-
+@import 'assets/mixin.scss';
 body {
     font: 1.2rem "宋体", "Arial Narrow", HELVETICA;
-    background: $white;
+    background: white;
     padding: 0;
     margin: 0;
 }
 
 a {
-    color: $black;
+    color: gray;
     text-decoration: none;
 }
 
@@ -34,6 +28,8 @@ input {
 }
 
 ul {
+    padding: 0;
+    margin: 0;
     list-style: none;
 }
 

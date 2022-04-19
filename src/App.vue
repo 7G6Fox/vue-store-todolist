@@ -12,8 +12,6 @@ export default {
 </script>
 
 <style lang='scss'>
-@import "@/assets/home.scss";
-@import "@/assets/mixin.scss";
-@import "@/assets/iconfont/iconfont.css";
+@import "assets/home.scss";
 
 </style>

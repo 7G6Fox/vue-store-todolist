@@ -11,12 +11,14 @@ name:'myFooter',
 }
 </script>
 
-<style scope>
+<style lang='scss' scope>
    footer{
      width: 100%;
      text-align: center;
      position: absolute;
      bottom: 0;
-     height: 5rem;
+     p{
+       height: .5rem;
+     }
    }
 </style>

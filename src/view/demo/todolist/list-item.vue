@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-@import '@/assets/css/listcomm.scss';
+@import 'assets/css/color.scss';
 li button.btn-delete {
     display: none;
     margin-top: 3px;
@@ -55,7 +55,7 @@ li button.btn-delete {
     right: 10px;
     position: absolute;
     border: none;
-    top: 5px;
+    top: .8rem;
     font-weight: bold;
     cursor: pointer;
     border: none;
@@ -75,10 +75,13 @@ label {
     font-size: 1.2em;
 }
 
-input,
 label:hover {
     cursor: pointer;
     font-size: 1.3em;
+}
+input{
+      transform: scale(1.5);
+     cursor: pointer;
 }
 
 //点击完成后的划线
