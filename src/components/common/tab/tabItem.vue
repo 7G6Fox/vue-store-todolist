@@ -48,12 +48,12 @@ $ico_gray: #8a8a8a;
 .foot-item {
   flex: 1;
   color: $ico_gray;
-  font-size: 1rem;
   i {
-    font-size: 2.7rem;
+    font-size: 2.8rem;
   }
   .item-text {
     margin-top: 1px;
+      font-size: 1.4rem;
   }
 }
 </style>

@@ -56,6 +56,7 @@ export default {
   },
   mounted: function () {
     // 1.操作DOM, 在前后添加Slide
+    // this.totalWidth = document.getElementById("hy-swiper").clientWidth;
     window.onresize = () => {
       return (() => {
         this.totalWidth = document.getElementById("hy-swiper").clientWidth;

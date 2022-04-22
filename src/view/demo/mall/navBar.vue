@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import bar from "components/common/tabBar";
-import item from "components/common/tabItem";
+import bar from "components/common/tab/tabBar";
+import item from "components/common/tab/tabItem";
 export default {
 components: {bar,item},
 }

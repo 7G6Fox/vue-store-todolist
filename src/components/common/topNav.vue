@@ -13,47 +13,48 @@
 </template>
 
 <script>
-export default {
-  name: "topNa",
-  data() {
-    return {
-      topStyle: {
-        backgroundColor: this.color,
-        color: this.fontcolor,
-      },
+    export default {
+        name: "topNa",
+        data() {
+            return {
+                topStyle: {
+                    backgroundColor: this.color,
+                    color: this.fontcolor,
+                },
+            };
+        },
+        props: {
+            color: {
+                type: String,
+                default: "white",
+            },
+            fontcolor: {
+                type: String,
+                default: "black",
+            },
+        },
     };
-  },
-  props: {
-    color: {
-      type: String,
-      default: "white",
-    },
-    fontcolor: {
-      type: String,
-      default: "black",
-    },
-  },
-};
 </script>
 
 <style scoped>
-.topnav {
-  width: 100%;
-  display: flex;
-  height: 5rem;
-  line-height: 5rem;
-  text-align: center;
-  font-size: 1.4rem;
-  position: fixed;
-  top: 0;
-  z-index: 1;
-}
-
-.topnav div:nth-child(2) {
-  flex: 1;
-}
-.topnav div:nth-child(3),
-.topnav div:nth-child(1) {
-  width: 6rem;
-}
+    .topnav {
+        width: 100%;
+        display: flex;
+        height: 5rem;
+        line-height: 5rem;
+        text-align: center;
+        font-size: 1.6rem;
+        /* position: fixed;
+  top: 0; */
+        z-index: 10;
+    }
+    
+    .topnav div:nth-child(2) {
+        flex: 1;
+    }
+    
+    .topnav div:nth-child(3),
+    .topnav div:nth-child(1) {
+        width: 6rem;
+    }
 </style>

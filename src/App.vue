@@ -13,5 +13,6 @@ export default {
 
 <style lang='scss'>
 @import "assets/home.scss";
+@import 'assets/css/color.scss';
 
 </style>

@@ -1,6 +1,9 @@
 <template>
   <div id="shopMall">
-      <router-view></router-view>
+      <keep-alive>
+       <router-view></router-view>
+      </keep-alive>
+
       <navbar></navbar>
   </div>
 </template>

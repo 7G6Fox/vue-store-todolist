@@ -3,10 +3,4 @@
     width: 100%;
     font-size: 1.6rem;
     background-color: white;
-    &::before {
-        content: "";
-        display: block;
-        height: 5rem;
-        top: 0;
-    }
 }
