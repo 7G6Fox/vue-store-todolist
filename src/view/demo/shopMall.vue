@@ -1,10 +1,10 @@
 <template>
   <div id="shopMall">
-      <keep-alive>
+      <keep-alive exclude="GoodDetail">
        <router-view></router-view>
       </keep-alive>
 
-      <navbar></navbar>
+      <navbar v-show="!this.$route.path.includes('goodDetail')"></navbar>
   </div>
 </template>
 

@@ -247,7 +247,6 @@ export default {
 
 .swiper {
   display: flex;
-  height: 100%;
 }
 
 .indicator {

@@ -29,5 +29,7 @@ components: {bar,item},
 </script>
 
 <style scope>
-
+.iconfont{
+  padding: 0 15px;
+}
 </style>

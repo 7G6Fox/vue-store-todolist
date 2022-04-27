@@ -6,6 +6,8 @@ const car = () =>
     import ('../view/demo/mall/s-car.vue');
 const shopCentre = () =>
     import ('../view/demo/mall/s-centre.vue');
+const goodDetail = () =>
+    import ('../view/demo/mall/good-detail.vue');
 export default [{
         path: '',
         redirect: 'shopHome'
@@ -26,5 +28,9 @@ export default [{
         name: 'shopCentre',
         path: 'shopCentre',
         component: shopCentre
+    }, {
+        name: 'goodDetail',
+        path: 'goodDetail',
+        component: goodDetail,
     }
 ]

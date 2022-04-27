@@ -1,8 +1,8 @@
 <template>
   <div class="good-item">
-    <img :src="good.show.img" />
+    <img @click="toDetail" :src="showImage" />
     <div class="goods-info">
-      <p>{{ good.title }}</p>
+      <p @click="toDetail">{{ good.title }}</p>
       <span class="price">￥{{ good.price }}</span>
       <span class="collect">♡ {{ good.cfav }}</span>
     </div>
@@ -20,18 +20,33 @@ export default {
       },
     },
   },
+  methods:{
+    toDetail() {
+      if(this.$route.path.includes('goodDetail'))
+      return alert('施工中...无法跳转');
+      this.$router.push({
+        path: '/toMall/goodDetail',
+        query: { iid: this.good.iid }
+      });
+    },
+  },
+  computed: {
+    showImage() {
+      return this.good.image || this.good.show.img;
+    },
+  },
 };
 </script>
 
 <style lang='scss' scope>
 .good-item {
   width: 48%;
-font-size: 1.4rem;
-padding-bottom: 60px;
-position: relative;
-border-radius: 5px;
-background-color: white;
-margin-bottom: 16px;
+  font-size: 1.4rem;
+  padding-bottom: 60px;
+  position: relative;
+  border-radius: 5px;
+  background-color: white;
+  margin-bottom: 16px;
   img {
     width: 100%;
     border-radius: 5px 5px 0 0;

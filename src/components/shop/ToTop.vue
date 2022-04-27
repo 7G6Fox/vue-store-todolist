@@ -7,7 +7,7 @@
 <script>
 export default {
   name: "ToTop",
-};
+}
 </script>
 
 <style scope>

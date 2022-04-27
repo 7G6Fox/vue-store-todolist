@@ -17,7 +17,7 @@
       :pull-up-load="true"
       @pullingUp="loadMore">
       <Swiper>
-        <SwiperItem v-for="item in banners" :key="item.id">
+        <SwiperItem v-for="item in banners" :key="item.id" >
           <a :href="item.link">
             <img :src="item.image" @load="imageLoad" />
           </a>
@@ -36,7 +36,7 @@
       <GoodsList :goods="goods[currentType].list" />
     </Scroll>
 
-    <ToTop @click.native="backClick" v-show="isBackShow" />
+    <ToTop @click.native='backClick' v-show="isBackShow" />
   </div>
 </template>
 <script>
@@ -80,6 +80,7 @@ export default {
     };
   },
   created() {
+
     this.getHomeData();
     //  请求商品
     this.getGoodsData("pop");
@@ -87,6 +88,7 @@ export default {
     this.getGoodsData("sell");
   },
   mounted() {
+
     //
     this.$bus.$on("GoodsIndex", (index) => {
       switch (index) {
@@ -103,13 +105,18 @@ export default {
       this.$refs.tabControl1.currentIndex = index;
        this.$refs.tabControl2.currentIndex = index;
     });
+
   },
   activated(){
-    this.$refs.scroll.scrollTop(0 , this.savaY, 0);
-    this.$refs.scroll.refresh();
+    // console.log("组件被激活,y：",this.savaY);
+    // console.log("组件被激活,y：", this.$refs.scroll);
+     this.$refs.scroll.scrollTop(0, this.savaY, 1500);
+    // console.log(this.$refs.scroll.scrollTop);
+    
   },
   deactivated(){
     this.savaY = this.$refs.scroll.scroll.y;
+    // console.log('组件被销毁',this.savaY);
   },
   methods: {
     // 网络请求
@@ -130,13 +137,18 @@ export default {
       });
     },
     backClick() {
-      this.$refs.scroll.scrollTop(0, 0, 1500);
+    // setTimeout(
+    //     ()=>{
+     this.$refs.scroll.scrollTop(0, 0, 1500);
+        // }
+        // ,0);
     },
     getDistance(position) {
-      if (!this.isBackShow) {
-        this.isBackShow = position.y < -1000;
-      }
-      this.isTabShow= (-position.y) > this.tabOffsetTop;
+ 
+        this.isBackShow = -position.y > 1000;
+       this.isTabShow= (-position.y) > this.tabOffsetTop;
+      //  console.log('distance:',position.y);
+      //  console.log('tabOffsetTop:',this.tabOffsetTop);
     },
     loadMore() {
       this.getGoodsData(this.currentType);
@@ -163,12 +175,13 @@ export default {
   height: 100vh;
   position: relative;
   .content {
+    position: absolute;
     overflow: hidden;
     left: 0;
     right: 0;
     top: 5rem;
     bottom: 5.7rem;
-    position: absolute;
+   
   }
   ul {
     color: $mall-orange;
