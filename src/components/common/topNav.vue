@@ -26,11 +26,11 @@
         props: {
             color: {
                 type: String,
-                default: "white",
+                default: "#ff9234",
             },
             fontcolor: {
                 type: String,
-                default: "black",
+                default: "white",
             },
         },
     };

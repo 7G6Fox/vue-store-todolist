@@ -33,9 +33,12 @@ export default {
     },
   },
   mounted() {
+    this.$nextTick(()=>{
+    this.initScroll();
+    })
     // setTimeout(() => {
       //等dom加载完毕后再初始化
-      this.initScroll();
+
     // }, 20);
   },
   updated() {
@@ -46,7 +49,7 @@ export default {
       this.scroll = new BScroll(this.$refs.wrapper, {
         click: true,
         observeDOM: true,
-        mouseWheel: true,
+        // mouseWheel: true,
         probeType: this.probeType,
         pullUpLoad: this.pullUpLoad,
       });

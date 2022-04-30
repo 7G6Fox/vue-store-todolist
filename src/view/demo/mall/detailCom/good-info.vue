@@ -5,7 +5,7 @@
     <p class="price">
       <em>{{ goodInfo.price }}</em>
       <s>{{ goodInfo.oldPrice}}</s>
-      <sup>{{ goodInfo.discount }}</sup>
+      <sup v-show="goodInfo.discount">{{ goodInfo.discount }}</sup>
     </p>
 
     <p class="row_flex">

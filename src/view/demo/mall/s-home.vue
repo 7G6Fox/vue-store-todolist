@@ -1,6 +1,6 @@
 <template>
   <div id="shopHome">
-    <topnav fontcolor="#fff" color="#ff9234">
+    <topnav>
       <p slot="center">商品首页</p>
     </topnav>
        <TabControl
@@ -105,14 +105,11 @@ export default {
       this.$refs.tabControl1.currentIndex = index;
        this.$refs.tabControl2.currentIndex = index;
     });
-
+ this.$refs.scroll.refresh();
   },
   activated(){
     // console.log("组件被激活,y：",this.savaY);
-    // console.log("组件被激活,y：", this.$refs.scroll);
      this.$refs.scroll.scrollTop(0, this.savaY, 1500);
-    // console.log(this.$refs.scroll.scrollTop);
-    
   },
   deactivated(){
     this.savaY = this.$refs.scroll.scroll.y;
@@ -137,15 +134,12 @@ export default {
       });
     },
     backClick() {
-    // setTimeout(
-    //     ()=>{
      this.$refs.scroll.scrollTop(0, 0, 1500);
-        // }
-        // ,0);
     },
+    //scroll中,监听滚动的回调函数
     getDistance(position) {
- 
-        this.isBackShow = -position.y > 1000;
+      
+       this.isBackShow = -position.y > 1000;
        this.isTabShow= (-position.y) > this.tabOffsetTop;
       //  console.log('distance:',position.y);
       //  console.log('tabOffsetTop:',this.tabOffsetTop);

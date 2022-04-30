@@ -14,7 +14,7 @@
       </p>
     </topNav>
 
-    <Scroll class="wrapper" 
+    <Scroll class="scroll" 
     ref="scroll"
     :probeType="3"
     :distance="distance"
@@ -32,6 +32,9 @@
       <DetailComment ref="comments"  :commentInfo="commentInfo" />
       <GoodsList ref="recommends" :goods="recommends"></GoodsList>
     </Scroll>
+      
+      <ToTop @click.native='backClick' v-show="isBackShow" />
+      <DetailBar :myId = "iid" @addToCar="addToCar"/>
   </div>
 </template>
 
@@ -40,6 +43,7 @@ import { Swiper, SwiperItem } from "components/common/swiper/index";
 import Scroll from "components/common/scroll/MyScroll";
 import topNav from "@/components/common/topNav";
 import  debounce from '@/components/common/util';
+import ToTop from "components/shop/ToTop";
 
 import {
   getDetail,
@@ -55,6 +59,7 @@ import GoodsDetail from "./detailCom/detail-goods.vue";
 import DetailParams from "./detailCom/detail-params";
 import DetailComment from "@/view/demo/mall/detailCom/detail-comment";
 import GoodsList from '@/components/shop/GoodsList';
+import DetailBar from './detailCom/detail-bar-bottom';
 export default {
   name: "GoodDetail",
   data() {
@@ -71,7 +76,7 @@ export default {
       recommends: [],
       TopY: 0, //  记录内容的offsetTop
       getTopY: null, //防抖函数
-      currentIndex: 0,
+      isBackShow: false,//点击回到最上方
     };
   },
   components: {
@@ -79,12 +84,14 @@ export default {
     SwiperItem,
     Scroll,
     topNav,
+    ToTop,
     ShowInfo,
     ShopDetail,
     GoodsDetail,
     DetailParams,
     DetailComment,
-    GoodsList
+    GoodsList,
+    DetailBar
   },
   created() {
     this.getGoodInfo();
@@ -145,6 +152,9 @@ export default {
     goBack() {
       this.$router.back();
     },
+    backClick() {
+     this.$refs.scroll.scrollTop(0, 0, 1500);
+    },
     goodActive(index) {
      this.bannerIndex = index;
      this.$refs.scroll.scrollTop(0,-this.TopY[index],400);  
@@ -153,21 +163,36 @@ export default {
     distance(position){
      let posY= - position.y;
      const len = this.TopY.length;
+     //判断滚动到了哪里，将导航栏样式做出对应修改
     for(let i = 0 ; i<len-1 ; i++){
        if(this.bannerIndex !==
         i && posY>= this.TopY[i]&& posY < this.TopY[i+1]){
-          this.bannerIndex = i ;  
+          this.bannerIndex = i ;  }
      }
-     }
-     
+     this.isBackShow = -position.y > 1000;
     },
     detailImgLoad(){
       debounce(()=>{
       this.$refs.scroll.refresh();
       },50)
-
+    },
+    addToCar(){
+      //购物车商品的数据结构
+      const product ={};
+      product.iid = this.iid;
+      product.img = this.imgList[0];
+      product.title = this.goodInfo.title;
+      product.desc = this.goodInfo.desc;
+      product.newPrice = this.goodInfo.realPrice;
+       product.count = 0;
+       product.checked = false;
+      //将加入购物车方法在action中包装成promise，执行成功再显示提示
+       this.$store.dispatch('addToCar', product).then((text)=>{
+              this.$toast.show(text);
+       });
     }
   },
+  
 };
 </script>
 
@@ -178,8 +203,8 @@ export default {
   height: 100vh;
   position: relative;
   z-index: 1;
-  .wrapper {
-    height: calc(100% - 50px);
+  .scroll {
+    height: calc(100% - 5rem - 5rem);
     background-color: white;
   }
   .img-swiper {

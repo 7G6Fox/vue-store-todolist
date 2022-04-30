@@ -7,8 +7,7 @@ import blog from './blog'
 import shop from './shop'
 const shopMall = () =>
     import ('view/demo/shopMall.vue'); //懒加载页面
-const musicPlay = () =>
-    import ('view/demo/musicPlay');
+
 const todoList = () =>
     import ('view/demo/todoList');
 export default new VueRouter({
@@ -32,9 +31,6 @@ export default new VueRouter({
                 children: shop
             },
             {
-                path: '/toMusic',
-                component: musicPlay
-            }, {
                 path: '/toLogin',
                 component: login
             },
