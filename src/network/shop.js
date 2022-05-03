@@ -30,8 +30,30 @@ function getRecommend() {
         url: "/recommend"
     })
 }
-export { getHomeMultidata, getHomeGood, getDetail, getRecommend }
 
+function getCategory() {
+    return request({
+        url: "/category"
+    })
+}
+
+function getCategoryItem(miniWallkey) {
+    return request({
+        url: "/subcategory/detail",
+        params: {
+            miniWallkey
+        }
+    })
+}
+export {
+    getHomeMultidata,
+    getHomeGood,
+    getDetail,
+    getRecommend,
+    getCategory,
+    getCategoryItem
+}
+//整合数据
 export class GoodInfo {
     constructor(itemInfo, columns, services) {
         this.title = itemInfo.title;
@@ -56,9 +78,9 @@ export class ShopInfo {
 }
 
 export class GoodsParam {
-    constructor(info, rule) {
+    constructor(info, rule = null) {
         this.image = info.images ? info.images[0] : '';
         this.infos = info.set;
-        this.sizes = rule.tables;
+        this.sizes = rule ? rule.tables : '';
     }
 }

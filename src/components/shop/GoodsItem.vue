@@ -1,10 +1,12 @@
 <template>
-  <div class="good-item">
+  <div class="good-item" v-show="this.good.length !== null">
     <img @click="toDetail" :src="showImage" />
     <div class="goods-info">
       <p @click="toDetail">{{ good.title }}</p>
+      <p>
       <span class="price">￥{{ good.price }}</span>
       <span class="collect">♡ {{ good.cfav }}</span>
+      </p>   
     </div>
   </div>
 </template>
@@ -20,29 +22,39 @@ export default {
       },
     },
   },
-  methods:{
+  methods: {
     toDetail() {
-      if(this.$route.path.includes('goodDetail'))
-      return alert('施工中...无法跳转');
+      if (this.$route.path.includes("goodDetail"))
+        return alert("施工中...无法跳转");
       this.$router.push({
-        path: '/toMall/goodDetail',
-        query: { iid: this.good.iid }
+        path: "/toMall/goodDetail",
+        query: { iid: this.good.iid },
       });
     },
   },
   computed: {
     showImage() {
-      return this.good.image || this.good.show.img;
+      if (this.good.show) {
+        return this.good.show.img;
+      } else {
+        return this.good.image || this.good.img;
+      }
     },
+    // showPrice() {
+    //   return this.good.price || this.good.props[10];
+    // },
+    // showCfav() {
+    //   return this.good.price || this.good.props[9];
+    // },
   },
 };
 </script>
 
 <style lang='scss' scope>
 .good-item {
-  width: 48%;
+  width: 46%;
   font-size: 1.4rem;
-  padding-bottom: 60px;
+  padding-bottom: 3rem;
   position: relative;
   border-radius: 5px;
   background-color: white;
@@ -50,10 +62,10 @@ export default {
   img {
     width: 100%;
     border-radius: 5px 5px 0 0;
+    height: 90%;
   }
   .goods-info {
     position: absolute;
-    bottom: 5px;
     left: 0;
     right: 0;
     text-align: center;
@@ -61,7 +73,7 @@ export default {
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
-      margin-bottom: 5px;
+      margin: 5px 0;
     }
     .price {
       color: $mall-orange;

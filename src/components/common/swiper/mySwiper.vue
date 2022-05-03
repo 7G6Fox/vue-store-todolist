@@ -57,13 +57,15 @@ export default {
   mounted: function () {
     // 1.操作DOM, 在前后添加Slide
     // this.totalWidth = document.getElementById("hy-swiper").clientWidth;
-    window.onresize = () => {
+   
+    // console.log('totalWidth',this.totalWidth);
+  window.onresize = () => {
       return (() => {
         this.totalWidth = document.getElementById("hy-swiper").clientWidth;
       })();
-    };
-    // console.log('totalWidth',this.totalWidth);
-    
+
+    }
+     
     setTimeout(() => {
       this.handleDom();
       // 2.开启定时器

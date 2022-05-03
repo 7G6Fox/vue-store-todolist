@@ -2,8 +2,6 @@ import VueRouter from "vue-router"
 import App from '../App'
 import home from 'view/my-index'
 import login from 'components/user-login'
-import write from 'view/home/h-write'
-import blog from './blog'
 import shop from './shop'
 const shopMall = () =>
     import ('view/demo/shopMall.vue'); //懒加载页面
@@ -21,7 +19,6 @@ export default new VueRouter({
             {
                 path: '/home',
                 component: home,
-                children: blog
             }, {
                 path: '/toList',
                 component: todoList
@@ -33,11 +30,8 @@ export default new VueRouter({
             {
                 path: '/toLogin',
                 component: login
-            },
-            {
-                path: '/write',
-                component: write
             }
+
         ]
 
     }],

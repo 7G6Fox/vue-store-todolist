@@ -1,5 +1,4 @@
-const shopHome = () =>
-    import ('../view/demo/mall/s-home.vue');
+import shopHome from "../view/demo/mall/s-home.vue";
 const category = () =>
     import ('../view/demo/mall/s-category.vue');
 const car = () =>

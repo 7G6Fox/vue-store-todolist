@@ -22,7 +22,7 @@ const getters = {
     },
     totalCount(state) {
         return state.carList.filter(item => {
-            console.log("totalCount", item.checked);
+            // console.log("totalCount", item.checked);
             return item.checked
         }).reduce((preValue, item) => {
             return preValue + item.count
@@ -42,7 +42,7 @@ const actions = {
                 context.commit('add_to_car', value)
                 resolve('添加成功');
             }
-            console.log('添加成功');
+            // console.log('添加成功');
         })
 
     },
@@ -56,6 +56,7 @@ const actions = {
         const localList = JSON.parse(sessionStorage.getItem("carList")) || [];
         context.commit("init_carList", localList);
     },
+
 }
 const mutations = {
     add_counter(state, value) {
@@ -63,6 +64,14 @@ const mutations = {
     },
     add_to_car(state, carItem) {
         state.carList.push(carItem)
+    },
+    change_Count(state, value) {
+
+        const oldProduct = state.carList.find(item =>
+            item.iid === value.iid)
+        if (oldProduct && oldProduct.count !== value.count) {
+            oldProduct.count = value.count;
+        }
     },
     //删除购物车内容
     delete_item(state) {

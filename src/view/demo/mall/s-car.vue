@@ -7,23 +7,21 @@
     <MyScroll ref="scroll" class="wrap" :probeType="3">
       <div class="car-item" v-for="(item, index) in carList" :key="index">
         <div class="row_flex">
-          <input
-            type="checkbox"
-            @click="isChecked(item)"
-            v-model="item.checked"
-          />
+          <input type="checkbox" v-model="item.checked" />
           <img :src="item.img" />
           <div class="car-left">
             <p>
-              <strong>{{ item.title }}</strong>
+              <strong @click="toDetail(item.iid)">{{ item.title }}</strong>
             </p>
             <span>{{ item.desc }} </span>
             <p>
               <span class="car-price">￥{{ item.newPrice }}</span>
               <span class="car-number">
                 <input @click="less(item)" type="button" value="-" />
-                <input type="text" :value="'x' + item.count" disabled />
-                <input @click="add_counter(item)"  type="button" value="+" />
+                <span @click="showMask(item)">
+                  {{ "x" + item.count }}
+                </span>
+                <input @click="add_counter(item)" type="button" value="+" />
               </span>
             </p>
           </div>
@@ -39,7 +37,7 @@
       <div class="count-right">
         <span>
           <p>
-            已选中{{ totalCount }}件，合计：<strong>{{ totalPrice }}</strong>
+            选中{{ totalCount }}件，合计：<strong>{{ totalPrice }}</strong>
           </p>
           <p class="delete" @click="deleteItem">删除</p>
         </span>
@@ -47,21 +45,41 @@
 
       <button class="car-total">结算</button>
     </div>
+
+    <MyDialog :showItem="showItem" class="my-dialog" @on-close="dialogHide">
+      <div slot="header">商品数量</div>
+      <input
+        slot="main"
+        type="text"
+        maxlength="3"
+        v-model="myItem.count"
+        @input="myItem.count = myItem.count.toString().replace(/[^\d]/g, '')"
+      />
+      <button slot="cancel" @click="dialogHide(false)">取消</button>
+      <button slot="confirm" @click="dialogHide(true)">确定</button>
+    </MyDialog>
   </div>
 </template>
 
 <script>
 import topNav from "@/components/common/topNav";
 import MyScroll from "@/components/common/scroll/MyScroll";
-import { mapGetters,mapMutations } from "vuex";
+
+import MyDialog from "@/components/common/diolog/MyDialog";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   name: "shopCar",
   data() {
-    return {};
+    return {
+      showItem: false,
+      myItem: {},
+    };
   },
-  components: { topNav, MyScroll },
+  components: { topNav, MyScroll, MyDialog },
   computed: {
     ...mapGetters(["carLength", "carList", "totalPrice", "totalCount"]),
+
+    //是否全选
     isCheckAll: {
       //点击全选按钮时，会进入set，存储isCheckAll
       //全选按钮的checked为true时set传入value=true
@@ -74,28 +92,45 @@ export default {
           (pre, item) => pre + (item.checked ? 1 : 0),
           0
         );
-        console.log("isCheckAll", checkLength);
-        console.log("isCheckAll", this.carList);
         return checkLength === this.carLength && this.carLength > 0;
       },
     },
   },
   methods: {
-    ...mapMutations(['add_counter','less_counter']),
-    less(item){
-     if(item.count<=1){
-this.$toast.show("不能再减少了");
-     }else{
-       this.less_counter(item);
-     }
-       
-     
+    ...mapMutations(["add_counter", "less_counter"]),
+    showMask(item) {
+      this.showItem = true;
+      this.myItem.iid = item.iid;
+      this.myItem.count = item.count;
+      this.error_msg = false;
+    },
+    //是否隐藏弹窗，什么时候关闭弹窗
+    dialogHide(value) {
+      if (value) {
+        if (this.myItem.count) {
+          this.$store.commit("change_Count", this.myItem);
+          this.showItem = false;
+        } else {
+          this.showItem = true;
+        }
+      } else {
+        this.showItem = false;
+      }
+    },
+    less(item) {
+      if (item.count <= 1) {
+        this.$toast.show("不能再减少了");
+      } else {
+        this.less_counter(item);
+      }
     },
     deleteItem() {
       const number = this.totalCount;
       let a = confirm("确定删除这" + number + "件商品吗？");
       if (a) {
-        this.$store.dispatch("deleteItem").then((text) => this.$toast.show(text));
+        this.$store
+          .dispatch("deleteItem")
+          .then((text) => this.$toast.show(text));
       }
     },
     isChecked(item) {
@@ -104,10 +139,14 @@ this.$toast.show("不能再减少了");
     checkAll(value) {
       this.carList.forEach((element) => (element.checked = value));
     },
+    toDetail(value) {
+      this.$router.push({
+        path: "/toMall/goodDetail",
+        query: { iid: value },
+      });
+    },
   },
-  mounted() {
-    console.log();
-  },
+  mounted() {},
   activated() {
     this.$refs.scroll.refresh();
     // this.$store.dispatch("getList");
@@ -125,7 +164,7 @@ this.$toast.show("不能再减少了");
   position: relative;
 
   .wrap {
-    height: calc(100% - 5rem - 5rem - 5rem);
+    height: calc(100% - 5rem - 5.5rem - 5rem);
     overflow: hidden;
     .row_flex {
       align-items: center;
@@ -168,21 +207,27 @@ this.$toast.show("不能再减少了");
       .car-number {
         position: absolute;
         right: 0;
-        input {
-          width: 2.5rem;
-          height: 2.5rem;
+        input,
+        span {
+          width: 3rem;
+          height: 2.6rem;
           text-align: center;
           font-size: 15px;
           border: 1px solid gray;
           border-radius: 0;
         }
-        input:nth-child(2) {
-          width: 3rem;
+        input:first-child {
+          border-radius: 6px 0 0 6px;
+        }
+        input:last-child {
+          border-radius: 0 6px 6px 0;
+        }
+        span {
+          display: inline-block;
           border-left: none;
           border-right: none;
           background-color: white;
         }
-  
       }
       p:first-child {
         display: block;
@@ -210,12 +255,14 @@ this.$toast.show("不能再减少了");
     border-top: 1px solid gainsboro;
     position: relative;
     align-items: center;
-    justify-content: space-evenly;
-    font-size: 16.5px;
+    justify-content: space-between;
+    font-size: 15.5px;
+
     .count-right {
       letter-spacing: -1.5px;
       strong {
         color: $mall-orange;
+        font-size: 19px;
       }
       .delete {
         font-size: 14.5px;
@@ -225,6 +272,7 @@ this.$toast.show("不能再减少了");
     label {
       font-size: 15px;
       color: gray;
+      padding-left: 15px;
     }
     input[type="checkbox"] {
       width: 20px;
@@ -232,14 +280,34 @@ this.$toast.show("不能再减少了");
     }
   }
   .car-total {
-    height: 40px;
-    width: 60px;
+    height: 100%;
+    width: 100px;
     letter-spacing: 2px;
     background-color: #ff0000cf;
     border: none;
-    border-radius: 5px;
     color: white;
-    font-size: 16px;
+    font-size: 21px;
+  }
+
+  .my-dialog {
+    input {
+      border: none;
+      border-bottom: 1.5px solid $mall-orange;
+      font-size: 20px;
+      padding: 10px;
+    }
+    button {
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      background-color: #f05c42;
+      border-radius: 3px;
+      padding: 3px;
+      margin: 10px 0 0 30px;
+      font-family: "黑体";
+      height: 38px;
+      width: 60px;
+    }
   }
 }
 </style>

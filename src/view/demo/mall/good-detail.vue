@@ -107,7 +107,6 @@ export default {
         this.TopY.push(this.$refs.comments.$el.offsetTop-50);
         this.TopY.push(this.$refs.recommends.$el.offsetTop-50);
         this.TopY.push(Infinity);
-          console.log('getTopY:',this.TopY);
       };
          
   },
@@ -134,7 +133,7 @@ export default {
         //详情参数
         this.paramInfo = new GoodsParam(
           result.itemParams.info,
-          result.itemParams.rule
+          result.itemParams.rule 
         );
         //获取评论
         if (result.rate.cRate) 

@@ -1,78 +1,98 @@
 <template>
-  <ul>
-    <Scroll class="outer">
-      <li>
-          这是分类区噢
-      </li>
-      <li>1</li>
-      <li>2</li>
-      <li>3</li>
-      <li>4</li>
-      <li>5</li>
-      <li>6</li>
-      <li>7</li>
-      <li>8</li>
-      <li>9</li>
-      <li>10</li>
-      <li>11</li>
-      <li>12</li>
-      <li>13</li>
-      <li>14</li>
-      <li>15</li>
-      <li>16</li>
-      <li>17</li>
-      <li>18</li>
-      <li>19</li>
-      <li>20</li>
-      <li>21</li>
-      <li>22</li>
-      <li>23</li>
-      <li>24</li>
-      <li>25</li>
-      <li>26</li>
-      <li>27</li>
-      <li>28</li>
-      <li>29</li>
-      <li>30</li>
-      <li>31</li>
-      <li>32</li>
-      <li>33</li>
-      <li>34</li>
-      <li>35</li>
-      <li>36</li>
-      <li>37</li>
-      <li>38</li>
-      <li>39</li>
-      <li>40</li>
-      <li>41</li>
-      <li>42</li>
-      <li>43</li>
-      <li>44</li>
-      <li>45</li>
-      <li>46</li>
-      <li>47</li>
-      <li>48</li>
-      <li>49</li>
-      <li>50</li>
-      </Scroll>
-  </ul>
+  <div class="shop-category">
+    <topNav>
+      <p slot="center">商品分类</p>
+    </topNav>
 
+    <div class="category">
+      <Scroll class="categoryList" ref="navScroll" :probeType="2">
+        <myCategory :Category="Category" :getItem="getItem"></myCategory>
+      </Scroll>
+
+      <Scroll class="subCategory" ref="itemScroll" :probeType="3" :distance="distance">
+        <categoryItem :CategoryItem="CategoryItem" ></categoryItem>
+      </Scroll>
+
+      <ToTop @click.native='backClick' v-show="isBackShow" />
+    </div>
+  </div>
 </template>
 
 <script>
-import Scroll from "components/common/scroll/MyScroll"
+import topNav from "@/components/common/topNav";
+import Scroll from "components/common/scroll/MyScroll";
+import { getCategory, getCategoryItem } from "network/shop";
+import ToTop from "components/shop/ToTop";
+
+import categoryItem from "@/view/demo/mall/categoryCom/category-item";
+import myCategory from "@/view/demo/mall/categoryCom/my-Category";
 
 export default {
-name:'shopCategory',
-components:{Scroll}
-}
+  name: "shopCategory",
+  data() {
+    return {
+      Category: [],
+      CategoryItem: [],
+      currentCate: null,
+       isBackShow: false,
+    };
+  },
+  components: { Scroll, topNav, categoryItem, myCategory,ToTop },
+  created() {
+    //发送数据请求
+    this.init_cate();
+  },
+  methods: {
+    init_cate() {
+      getCategory().then((res) => {
+        const cate = res.data.category;
+        this.Category = cate.list;
+        this.currentCate = cate.list[0].miniWallkey;
+        console.log("接收到了myCategory", this.currentCate);
+        this.getItem(this.currentCate);
+      });
+    },
+     getItem(miniWallkey) {
+    console.log("getItem");
+    this.currentCate = miniWallkey;
+    getCategoryItem(miniWallkey).then((res) => {
+  
+      this.CategoryItem = res;
+      console.log(this.CategoryItem);
+    });
+  },
+  distance(position){
+     this.isBackShow = -position.y > 1000;  
+     },
+      backClick() {
+     this.$refs.itemScroll.scrollTop(0, 0, 1500);
+    }
+  },
+ 
+ 
+};
 </script>
 
-<style scope>
-.outer{
-  height: 500px;
-  width: 100%;
-  background-color: aqua;
+<style lang="scss" scoped>
+.shop-category {
+  height: 100vh;
+  max-width: 100%;
+  position: relative;
+}
+.category {
+  height: calc(100% - 5rem - 5.5rem);
   overflow: hidden;
+  font-size: 1.6rem;
+  display: flex;
+  .categoryList {
+    width: 25%;
+    height: 100%;
+    background-color: $cut-line;
+  }
+  .subCategory {
+    width: 75%;
+    height: 100%;
+    background-color: $white;
+  }
 }
 </style>
