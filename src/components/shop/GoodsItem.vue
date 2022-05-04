@@ -1,6 +1,6 @@
 <template>
   <div class="good-item" v-show="this.good.length !== null">
-    <img @click="toDetail" :src="showImage" />
+    <img  @click="toDetail" v-lazy="showImage" />
     <div class="goods-info">
       <p @click="toDetail">{{ good.title }}</p>
       <p>
@@ -77,7 +77,7 @@ export default {
     }
     .price {
       color: $mall-orange;
-      margin: 2px 10px;
+      margin: 2px 5px;
     }
   }
 }

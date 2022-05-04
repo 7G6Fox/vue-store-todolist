@@ -12,7 +12,7 @@
       </div>
 
       <div @click="collect">
-        <i class="icon" :class="{collected}"></i>
+        <i class="icon" :class="{ collected }"></i>
         <p>收藏</p>
       </div>
     </div>
@@ -27,51 +27,72 @@
 <script>
 export default {
   name: "DetailBottomBar",
-  data(){
-      return{
-          collected:false,
-          collectItem:JSON.parse(localStorage.getItem('collectItem'))||[],
+  data() {
+    return {
+      collected: false,
+      collectItem: JSON.parse(localStorage.getItem("collectItem")) || [],
+      isLogin: false,
+    };
+  },
+  props: {
+    myId: {
+      type: String,
+      default() {
+        return this.$route.query.iid;
+      },
+    },
+  },
+  mounted() {
+    const user = localStorage.getItem("user") || false;
+    if (user && user.length !== 0) {
+      this.isLogin = JSON.parse(user).isLogin;
+    }
+    //判断是否收藏
+    if (this.isLogin) {
+      if (this.collectItem.includes(this.myId)) {
+        this.collected = true;
+      } else {
+        this.collected = false;
       }
-  },props:{
-    myId:{
-      type:String,
-      default(){
-        return this.$route.query.iid
-      }
+    }else{
+      this.collected=false
     }
   },
-  mounted(){
-    //判断是否收藏
-   if(this.collectItem.includes(this.myId)){
-        this.collected = true
-      }else{
-        this.collected = false
-        } },
-   watch:{
-        collectItem:{
-          handler(value){
-          localStorage.setItem("collectItem", JSON.stringify(value));
-          }
-        }
-    },
-  methods:{
-      collect(){
-        this.collected = !this.collected;
-        if(this.myId == null)
-          return ;
-        if(this.collectItem.includes(this.myId) && !this.collected){
-          // console.log('移除',this.iid,'item',this.collectItem);
-          this.collectItem = this.collectItem.filter((item) => item !== this.myId);
-        }else{
-           this.collectItem.push(this.myId);
-        // console.log('push',this.myId,'item',this.collectItem);  
-      }
-      },
-      addToCar(){
-        this.$emit("addToCar");
-      }
-  },
 
+  watch: {
+    collectItem: {
+      handler(value) {
+        localStorage.setItem("collectItem", JSON.stringify(value));
+      },
+    },
+  },
+  methods: {
+    collect() {
+      if(! this.isLogin){
+        this.$toast.show('请先登录');
+        return;
+      }
+
+      this.collected = !this.collected;
+      if (this.myId == null) return;
+      if (this.collectItem.includes(this.myId) && !this.collected) {
+        // console.log('移除',this.iid,'item',this.collectItem);
+        this.collectItem = this.collectItem.filter(
+          (item) => item !== this.myId
+        );
+      } else {
+        this.collectItem.push(this.myId);
+        // console.log('push',this.myId,'item',this.collectItem);
+      }
+    },
+    addToCar() {
+      if(! this.isLogin){
+        this.$toast.show('请先登录');
+        return;
+      }
+      this.$emit("addToCar");
+    },
+  },
 };
 </script>
 
@@ -83,7 +104,6 @@ export default {
   background-color: $white;
   display: flex;
   text-align: center;
-
 }
 
 .bar-item {
@@ -101,19 +121,19 @@ export default {
     width: 22px;
     height: 22px;
     margin: 10px auto -2px;
-    background: url("@/assets/imgs/shop/detail_bottom.png") 0 0/100%;   
+    background: url("@/assets/imgs/shop/detail_bottom.png") 0 0/100%;
   }
-  p{
-        padding: 3px 0;
-    }
+  p {
+    padding: 3px 0;
+  }
   .service {
     background-position: 0 -54px;
   }
   .shop {
     background-position: 0 -98px;
   }
-  .collected{
-      background-position: 0 -27px;
+  .collected {
+    background-position: 0 -27px;
   }
 }
 

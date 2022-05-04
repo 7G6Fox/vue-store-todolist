@@ -164,7 +164,7 @@ export default {
   position: relative;
 
   .wrap {
-    height: calc(100% - 5rem - 5.5rem - 5rem);
+    height: calc(100% - 4.4rem - 5.5rem - 6rem);
     overflow: hidden;
     .row_flex {
       align-items: center;
@@ -250,7 +250,7 @@ export default {
     height: 14rem;
   }
   .carCount {
-    height: 5rem;
+    height: 6rem;
     background-color: white;
     border-top: 1px solid gainsboro;
     position: relative;
@@ -260,28 +260,30 @@ export default {
 
     .count-right {
       letter-spacing: -1.5px;
+      flex: 1;
       strong {
         color: $mall-orange;
-        font-size: 19px;
+        font-size: 1.9rem;
       }
       .delete {
         font-size: 14.5px;
         text-align: right;
+        padding-right: 1rem;
       }
     }
     label {
       font-size: 15px;
       color: gray;
-      padding-left: 15px;
+      padding-left: 1.4rem;
     }
     input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
+      width: 1.8rem;
+      height: 1.8rem;
     }
   }
   .car-total {
     height: 100%;
-    width: 100px;
+    width: 10rem;
     letter-spacing: 2px;
     background-color: #ff0000cf;
     border: none;
@@ -294,7 +296,7 @@ export default {
       border: none;
       border-bottom: 1.5px solid $mall-orange;
       font-size: 20px;
-      padding: 10px;
+      padding: 1rem;
     }
     button {
       border: none;
@@ -303,10 +305,10 @@ export default {
       background-color: #f05c42;
       border-radius: 3px;
       padding: 3px;
-      margin: 10px 0 0 30px;
+      margin: 1rem 0 0 3rem;
       font-family: "黑体";
-      height: 38px;
-      width: 60px;
+      height: 3.8rem;
+      width: 6rem;
     }
   }
 }

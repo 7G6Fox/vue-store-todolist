@@ -80,7 +80,7 @@ export default {
   position: relative;
 }
 .category {
-  height: calc(100% - 5rem - 5.5rem);
+  height: calc(100% - 4.4rem - 5.5rem);
   overflow: hidden;
   font-size: 1.6rem;
   display: flex;

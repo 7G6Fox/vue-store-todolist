@@ -22,6 +22,7 @@ export default {
   },
   computed: {
     isActive() {
+     
       return this.$route.path.includes(this.path);
       //若此时route页面与某一path相同，则返回 true，相当于返回对应的path
     },
@@ -31,10 +32,20 @@ export default {
   },
   methods: {
     itemClick() {
+       const user = localStorage.getItem('user') || false
+       let isLogin=false
+       if(user && user.length !== 0) {
+        isLogin = JSON.parse(user).isLogin
+        // console.log(isLogin);
+       }
+      
+      if(this.path === 'car'&& !isLogin){
+        this.$router.push('/toMall/toLogin');
+      }else{
       if(!this.$route.path.includes(this.path)){
         //当前路径中不包括本path就执行
        this.$router.push(this.path);
-      }
+      }}
       // else{
       //   console.log('重复点击');
       // }      

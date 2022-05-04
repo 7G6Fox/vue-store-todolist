@@ -1,3 +1,4 @@
+import axios from "axios";
 import { request } from "./request";
 
 function getHomeMultidata() {
@@ -45,6 +46,8 @@ function getCategoryItem(miniWallkey) {
         }
     })
 }
+
+
 export {
     getHomeMultidata,
     getHomeGood,

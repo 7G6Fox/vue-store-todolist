@@ -1,4 +1,5 @@
 import shopHome from "../view/demo/mall/s-home.vue";
+import login from 'components/user-login'
 const category = () =>
     import ('../view/demo/mall/s-category.vue');
 const car = () =>
@@ -31,5 +32,9 @@ export default [{
         name: 'goodDetail',
         path: 'goodDetail',
         component: goodDetail,
+    },
+    {
+        path: 'toLogin',
+        component: login
     }
 ]

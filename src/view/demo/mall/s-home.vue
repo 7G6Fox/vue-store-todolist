@@ -172,7 +172,7 @@ export default {
     overflow: hidden;
     left: 0;
     right: 0;
-    top: 5rem;
+    top: 4.4rem;
     bottom: 5.7rem;
    
   }

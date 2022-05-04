@@ -203,7 +203,7 @@ export default {
   position: relative;
   z-index: 1;
   .scroll {
-    height: calc(100% - 5rem - 5rem);
+    height: calc(100% - 4.4rem - 5rem);
     background-color: white;
   }
   .img-swiper {

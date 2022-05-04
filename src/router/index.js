@@ -1,7 +1,7 @@
 import VueRouter from "vue-router"
 import App from '../App'
 import home from 'view/my-index'
-import login from 'components/user-login'
+
 import shop from './shop'
 const shopMall = () =>
     import ('view/demo/shopMall.vue'); //懒加载页面
@@ -26,10 +26,6 @@ export default new VueRouter({
                 path: '/toMall',
                 component: shopMall,
                 children: shop
-            },
-            {
-                path: '/toLogin',
-                component: login
             }
 
         ]

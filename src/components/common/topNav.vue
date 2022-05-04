@@ -40,8 +40,8 @@
     .topnav {
         width: 100%;
         display: flex;
-        height: 5rem;
-        line-height: 5rem;
+        height:4.4rem;
+        line-height: 4.4rem;
         text-align: center;
         font-size: 1.6rem;
         /* position: fixed;

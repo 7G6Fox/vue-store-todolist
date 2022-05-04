@@ -32,6 +32,6 @@ export default {
 width: 100%;
 word-wrap: break-word;
 justify-content:space-evenly;
-  background-color: $cut-line;
+background-color: $cut-line;
 }
 </style>

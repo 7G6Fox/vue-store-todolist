@@ -1,7 +1,6 @@
 <template>
   <footer>
-      <p>我的博客:<router-link to="/">xxxx</router-link></p>  
-      <p>github:<a href="">xxxx</a></p>   
+      <p><a href="https://github.com/7G6Fox/vue-store-todolist">myGithub</a></p>   
   </footer>
 </template>
 
