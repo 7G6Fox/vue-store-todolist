@@ -74,8 +74,9 @@ export default {
     addUser() {
       let name = this.username;
       let pwd = this.password;
-      //  console.log(this.oldUser);
-      if (!this.oldUser || Object.getOwnPropertyNames(this.oldUser) === 0) {
+       console.log('olduser',this.oldUser);
+     
+      if (!this.oldUser ||JSON.stringify(this.oldUser) == '{}' ) {
         if (!this.islegal(name)) {
           return;
         } else {
@@ -166,7 +167,7 @@ export default {
     width: 80%;
     height: 5rem;
     font-size: 1.8rem;
-    color: #ff3d10;
+    color: white;
   }
   button {
     height: 4rem;

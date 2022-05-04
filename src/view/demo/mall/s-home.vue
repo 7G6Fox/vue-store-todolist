@@ -32,6 +32,7 @@
       <TabControl
         :titles="['流行', '爆款', '精选']"
         ref="tabControl2"
+        v-show="! isTabShow"
       />
       <GoodsList :goods="goods[currentType].list" />
     </Scroll>
@@ -105,7 +106,7 @@ export default {
       this.$refs.tabControl1.currentIndex = index;
        this.$refs.tabControl2.currentIndex = index;
     });
- this.$refs.scroll.refresh();
+//  this.$refs.scroll.refresh();
   },
   activated(){
     // console.log("组件被激活,y：",this.savaY);
@@ -148,11 +149,7 @@ export default {
       this.$refs.scroll.refresh();
     },
     imageLoad() {
-      //当轮播图图片加载完后获取高度
-      if (!this.isLoad) {
         this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop;
-       this.isLoad = true;
-      }
     },
 
   },
@@ -170,10 +167,7 @@ export default {
   .content {
     position: absolute;
     overflow: hidden;
-    left: 0;
-    right: 0;
-    top: 4.4rem;
-    bottom: 5.7rem;
+    height: calc(100% - 4.4rem - 5.5rem);
    
   }
   ul {
