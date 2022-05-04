@@ -20,5 +20,7 @@ module.exports = {
                 data: '@import "@/assets/css/color.scss";'
             }
         }
-    }
+    },
+    publicPath: process.env.NODE_ENV === 'production' ? "/vue-store-todolist/" : "./"
+
 }

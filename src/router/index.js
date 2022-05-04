@@ -31,6 +31,5 @@ export default new VueRouter({
         ]
 
     }],
-    mode: 'history',
     linkActiveClass: 'route-active'
 });
