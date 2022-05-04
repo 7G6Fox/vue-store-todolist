@@ -1,4 +1,32 @@
-# t
+## 目录结构
+```
+├─assets
+│  ├─css
+│  │  └─mall
+│  ├─iconfont
+│  └─imgs
+│      └─shop
+│          └─center
+├─components
+│  ├─common
+│  │  ├─diolog
+│  │  ├─scroll
+│  │  ├─swiper
+│  │  ├─tab
+│  │  ├─tabControl
+│  │  └─toast
+│  └─shop
+├─network
+├─router
+├─store
+└─view
+    └─demo
+        ├─mall
+        │  ├─categoryCom
+        │  ├─childCom
+        │  └─detailCom
+        └─todolist
+```
 
 ## Project setup
 ```
