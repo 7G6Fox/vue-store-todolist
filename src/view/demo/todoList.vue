@@ -25,8 +25,8 @@
       />
       
     </div>
-    <p class="footer">感谢使用！</p>
-    <indexFooter></indexFooter>
+    <p class="footer">感谢使用！ </p>
+    <span><indexFooter class="github"></indexFooter></span>
   </div>
 </template>
 

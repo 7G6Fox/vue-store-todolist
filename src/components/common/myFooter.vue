@@ -14,10 +14,10 @@ name:'myFooter',
    footer{
      width: 100%;
      text-align: center;
-     position: absolute;
-     bottom: 0;
-     p{
-       height: .5rem;
-     }
+     font-size: 1.3rem;
+   font-weight: bold;
+   }
+   a{
+     color: white !important;
    }
 </style>

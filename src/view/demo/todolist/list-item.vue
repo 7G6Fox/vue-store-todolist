@@ -1,31 +1,24 @@
 <template>
-
   <li>
     <label>
       <input
         type="checkbox"
         :checked="todo.done"
         @change="handleCheck(todo.id)"
-      
       />
-      <span class="item"
-      :class="{isDone:todo.done}">{{ todo.title }}</span>
-       <button class="btn-delete" 
-    @click="handleDelete(todo.id)">
-    X</button>
+      <span class="item" :class="{ isDone: todo.done }">{{ todo.title }}</span>
+      <button class="btn-delete" @click="handleDelete(todo.id)">X</button>
     </label>
-   
   </li>
-
 </template>
 
 <script>
 export default {
   name: "MyItem",
-  data(){
-    return{
-      isDone:false
-    }
+  data() {
+    return {
+      isDone: false,
+    };
   },
   props: ["todo", "checkTodo", "deleteTodo"],
   methods: {
@@ -45,70 +38,73 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-@import 'assets/css/color.scss';
+@import "assets/css/color.scss";
 li button.btn-delete {
-    display: none;
-    margin-top: 3px;
-    background-color: transparent;
-    font-size: 18px;
-    color: $light-blue;
-    right: 10px;
-    position: absolute;
-    border: none;
-    top: .8rem;
-    font-weight: bold;
-    cursor: pointer;
-    border: none;
-    color: $light-blue;
-    &:hover {
-        color: $blue;
-    }
-    &:focus {
-        outline: none;
-    }
+  display: none;
+  margin-top: 3px;
+  background-color: transparent;
+  font-size: 18px;
+  color: $light-blue;
+  right: 10px;
+  position: absolute;
+  border: none;
+  top: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  color: $light-blue;
+  &:hover {
+    color: $blue;
+  }
+  &:focus {
+    outline: none;
+  }
 }
 
 li:hover .btn-delete {
-    display: block;
+  display: block;
 }
 label {
-    font-size: 1.2em;
+  font-size: 1.2em;
 }
 
 label:hover {
-    cursor: pointer;
-    font-size: 1.3em;
+  cursor: pointer;
+  font-size: 1.3em;
 }
-input{
-      transform: scale(1.5);
-     cursor: pointer;
+input {
+  transform: scale(1.5);
+  cursor: pointer;
 }
-
+  .item {
+    margin: 10px;
+     margin: 0 0.5rem;
+    padding: 1rem;
+  }
 //点击完成后的划线
 .isDone {
-    position: relative;
-    &::before {
-        content: "";
-        display: inline-block;
-        width: 100%;
-        height: 50%;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        border-top: 3px solid rgba(89, 114, 210, 0.77);
-        animation: borderShow 0.3s linear;
+  
+  position: relative;
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 100%;
+    height: 50%;
+   
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top: 3px solid rgba(89, 114, 210, 0.77);
+    animation: borderShow 0.3s linear;
+  }
+  @keyframes borderShow {
+    from {
+      width: 0;
     }
-    @keyframes borderShow {
-        from {
-            width: 0;
-        }
-        to {
-            width: 100%;
-        }
+    to {
+      width: 100%;
     }
-    .item {
-        margin: 10px;
-    }
+  }
+
 }
-        
 </style>

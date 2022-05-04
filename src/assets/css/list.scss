@@ -82,10 +82,14 @@
         }
     }
     .footer {
-        margin: 10px;
-        background-color: $sky;
+        background-color: #a6e5ff;
         border-radius: 5px;
-        padding: 1.8px;
         font-size: 1rem;
+        display: block;
+        line-height: 2rem;
+        height: 2rem;
+        padding: 2px;
+        margin-right: 10px;
+        box-shadow: 1px 1px 3px 1px #2d2d2d;
     }
 }
