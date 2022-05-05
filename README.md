@@ -1,6 +1,6 @@
 
-项目演示地址：https://7g6fox.github.io/vue-store-todolist/#/home
-部署在githubpages上，访问会有卡顿问题,正在想办法Orz,然后因为是移动端项目，最好用手机访问
+#### 项目演示地址：https://7g6fox.github.io/vue-store-todolist/#/home
+部署在githubpages上了，不过访问会有卡顿问题，正在想办法Orz，然后因为是移动端项目，最好用手机访问
 
 ## 目录结构
 ```
