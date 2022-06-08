@@ -1,6 +1,7 @@
 
 ### 项目演示地址：https://7g6fox.github.io/vue-store-todolist/#/home
-部署在githubpages上了，移动端项目，希望用手机访问
+部署在githubpages上了
+本项目是由Vue实现的商城移动端项目，和待做事项，下面为项目截图
 
 ## 商城项目截图
 ![首页](https://user-images.githubusercontent.com/95955307/169641986-3df7d824-ff08-4778-ba54-d727efbb8ef1.png)
